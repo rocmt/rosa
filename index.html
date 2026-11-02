@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rosa's first website hihi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fdf3f7; --pink:#f9c6d8; --pink-ink:#c2577f; --lilac:#dccdf6; --lilac-ink:#7a5cb8;
+    --mint:#c8eedd; --mint-ink:#3d8a6b; --peach:#ffe0c7; --butter:#fff3b8;
+    --card:#ffffff; --ink:#5b4b5e; --muted:#a493a6; --line:#f1dbe5;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#251d26; --pink:#5e3546; --pink-ink:#f6b3cc; --lilac:#43375c; --lilac-ink:#cdb8f5;
+      --mint:#2d4a3f; --mint-ink:#a9e6cb; --peach:#4d3a2c; --butter:#4a4528;
+      --card:#30262f; --ink:#f3e6f0; --muted:#b39fb2; --line:#46384a;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Fredoka,system-ui,sans-serif;overflow-x:hidden}
+  .blob{position:fixed;border-radius:50%;filter:blur(40px);opacity:.55;z-index:-1;pointer-events:none}
+  .b1{width:320px;height:320px;background:var(--pink);top:-80px;left:-60px}
+  .b2{width:280px;height:280px;background:var(--lilac);top:120px;right:-80px}
+  .b3{width:300px;height:300px;background:var(--mint);bottom:-100px;left:30%}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 16px 80px}
+  .top{display:flex;justify-content:flex-end;gap:8px;align-items:center;font-size:14px;color:var(--muted);min-height:36px}
+  h1{text-align:center;font-weight:600;font-size:clamp(34px,8vw,64px);line-height:1.05;margin:10px 0 6px;letter-spacing:-.5px;
+     background:linear-gradient(90deg,var(--pink-ink),var(--lilac-ink),var(--mint-ink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hihi{font-family:Caveat,cursive;font-weight:700;display:inline-block;transform:rotate(-8deg);color:var(--pink-ink);-webkit-text-fill-color:var(--pink-ink);margin-left:6px}
+  .tag{text-align:center;color:var(--muted);margin:0 0 28px}
+  input,button{font:inherit;color:inherit}
+  input[type=text]{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 14px;min-width:0}
+  input[type=text]:focus{outline:none;border-color:var(--lilac)}
+  button{cursor:pointer;border:0;border-radius:999px;padding:10px 18px;background:var(--card);border:2px solid var(--line)}
+  button.go{background:var(--pink);border-color:var(--pink);color:var(--pink-ink);font-weight:600}
+  button.go:disabled{opacity:.6;cursor:wait}
+  button.link{border:0;background:none;padding:0;text-decoration:underline;color:var(--muted)}
+  .badge{background:var(--lilac);color:var(--lilac-ink);border-radius:999px;padding:2px 12px;font-weight:600;font-size:13px}
+  .up{background:var(--card);border:2px dashed var(--pink);border-radius:24px;padding:18px;display:grid;gap:10px;max-width:620px;margin:0 auto}
+  .drop{display:block;text-align:center;padding:22px 12px;border-radius:18px;background:var(--butter);cursor:pointer;color:var(--ink)}
+  .drop.over{background:var(--peach)}
+  .drop input{display:none}
+  .drop b{font-weight:600}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  .row input{flex:1 1 160px}
+  .preview{max-height:160px;max-width:100%;border-radius:12px;display:block;margin:0 auto}
+  .msg{text-align:center;font-size:14px;min-height:22px;color:var(--pink-ink)}
+  .grid{columns:3 240px;column-gap:18px;margin-top:34px}
+  .pic{break-inside:avoid;margin:0 0 18px;background:var(--card);border-radius:18px;padding:10px 10px 12px;position:relative;
+       border:2px solid var(--line);transition:transform .2s}
+  .pic:nth-child(3n+1){transform:rotate(-1.2deg)} .pic:nth-child(3n+2){transform:rotate(1deg)}
+  .pic:hover{transform:rotate(0) scale(1.02)}
+  .pic img{width:100%;display:block;border-radius:12px;background:#fff;cursor:zoom-in}
+  .pic .t{font-family:Caveat,cursive;font-size:24px;line-height:1.1;margin:8px 4px 0}
+  .pic .by{font-size:13px;color:var(--muted);margin:2px 4px 0}
+  .pic.owner{border-color:var(--lilac)}
+  .pic .x{position:absolute;top:14px;right:14px;width:30px;height:30px;padding:0;border-radius:50%;background:var(--card);opacity:.9}
+  .empty{text-align:center;color:var(--muted);margin-top:40px}
+  .zoom{position:fixed;inset:0;background:rgba(40,25,40,.75);display:none;place-items:center;padding:16px;z-index:10;cursor:zoom-out}
+  .zoom.on{display:grid}
+  .zoom img{max-width:100%;max-height:92vh;border-radius:12px;background:#fff}
+  footer{text-align:center;color:var(--muted);font-size:13px;margin-top:40px}
+</style>
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div class="wrap">
+  <div class="top" id="who"></div>
+  <h1>Rosa's first website <span class="hihi">hihi</span></h1>
+  <p class="tag">drawings from everyone ✿</p>
+
+  <form class="up" id="upForm">
+    <label class="drop" id="drop">
+      <input type="file" id="file" accept="application/pdf,image/png,image/jpeg,image/webp">
+      <span id="dropText"><b>Choose a drawing</b><br>PDF, JPG or PNG</span>
+      <img class="preview" id="prev" alt="" hidden>
+    </label>
+    <div class="row">
+      <input type="text" id="title" maxlength="80" placeholder="title (optional)">
+      <input type="text" id="name" maxlength="30" placeholder="your name (optional)">
+    </div>
+    <button class="go" id="goBtn">Upload ✿</button>
+  </form>
+  <div class="msg" id="msg"></div>
+
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">Loading…</div>
+  <footer id="foot"></footer>
+</div>
+<div class="zoom" id="zoom"><img id="zoomImg" alt=""></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script type="module" src="rosa.js?v=1"></script>
+</body>
+</html>
