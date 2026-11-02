@@ -6,7 +6,7 @@
 <title>Rosa's first website hihi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Caveat:wght@500;700&family=Cherry+Bomb+One&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#fdf3f7; --pink:#f9c6d8; --pink-ink:#c2577f; --lilac:#dccdf6; --lilac-ink:#7a5cb8;
@@ -28,11 +28,16 @@
   .b3{width:300px;height:300px;background:var(--mint);bottom:-100px;left:30%}
   .wrap{max-width:1000px;margin:0 auto;padding:28px 16px 80px}
   .top{display:flex;justify-content:flex-end;gap:8px;align-items:center;font-size:14px;color:var(--muted);min-height:36px}
-  h1{text-align:center;font-weight:600;font-size:clamp(34px,8vw,64px);line-height:1.05;margin:10px 0 6px;letter-spacing:-.5px;
+  h1{text-align:center;font-family:"Cherry Bomb One",Fredoka,cursive;font-weight:400;font-size:clamp(36px,9vw,70px);line-height:1.1;margin:10px 0 6px;letter-spacing:.5px;
      background:linear-gradient(90deg,var(--pink-ink),var(--lilac-ink),var(--mint-ink));-webkit-background-clip:text;background-clip:text;color:transparent}
   .hihi{font-family:Caveat,cursive;font-weight:700;display:inline-block;transform:rotate(-8deg);color:var(--pink-ink);-webkit-text-fill-color:var(--pink-ink);margin-left:6px}
   .tag{text-align:center;color:var(--muted);margin:0 0 28px}
-  input,button{font:inherit;color:inherit}
+  input,button,textarea{font:inherit;color:inherit}
+  textarea{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-height:96px;resize:vertical;
+    font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:19px;line-height:1.35}
+  textarea:focus{outline:none;border-color:var(--lilac)}
+  .capnote{font-size:13px;color:var(--muted);margin:-4px 4px 0;display:flex;justify-content:space-between;gap:8px}
+  .capnote button{border:0;background:none;padding:0;color:var(--lilac-ink);font-size:13px;text-decoration:underline}
   input[type=text]{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:10px 14px;min-width:0}
   input[type=text]:focus{outline:none;border-color:var(--lilac)}
   button{cursor:pointer;border:0;border-radius:999px;padding:10px 18px;background:var(--card);border:2px solid var(--line)}
@@ -56,6 +61,7 @@
   .pic:hover{transform:rotate(0) scale(1.02)}
   .pic img{width:100%;display:block;border-radius:12px;background:#fff;cursor:zoom-in}
   .pic .t{font-family:Caveat,cursive;font-size:24px;line-height:1.1;margin:8px 4px 0}
+  .pic .cap{font-family:"Cormorant Garamond",Georgia,serif;font-style:italic;font-size:18px;line-height:1.35;margin:6px 4px 0;white-space:pre-line;overflow-wrap:anywhere}
   .pic .by{font-size:13px;color:var(--muted);margin:2px 4px 0}
   .pic.owner{border-color:var(--lilac)}
   .pic .x{position:absolute;top:14px;right:14px;width:30px;height:30px;padding:0;border-radius:50%;background:var(--card);opacity:.9}
@@ -83,6 +89,8 @@
       <input type="text" id="title" maxlength="80" placeholder="title (optional)">
       <input type="text" id="name" maxlength="30" placeholder="your name (optional)">
     </div>
+    <textarea id="caption" maxlength="600" placeholder="a caption, if you like…"></textarea>
+    <div class="capnote"><span id="capHint">Tell us where you were, how you felt, what the light was like ✿</span><button type="button" id="capNew">another idea</button></div>
     <button class="go" id="goBtn">Upload ✿</button>
   </form>
   <div class="msg" id="msg"></div>
@@ -94,6 +102,6 @@
 <div class="zoom" id="zoom"><img id="zoomImg" alt=""></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script type="module" src="rosa.js?v=1"></script>
+<script type="module" src="rosa.js?v=2"></script>
 </body>
 </html>

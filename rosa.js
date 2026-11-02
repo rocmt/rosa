@@ -147,10 +147,11 @@ $("upForm").addEventListener("submit", async (e) => {
       byOwner: ownerMode,
       name: ownerMode ? OWNER_NAME : ($("name").value.trim().slice(0, 30) || "Anonymous"),
       title: $("title").value.trim().slice(0, 80),
+      caption: $("caption").value.trim().slice(0, 600),
       image: pending,
       createdAt: serverTimestamp(),
     });
-    pending = null; $("file").value = ""; $("title").value = ""; $("prev").hidden = true;
+    pending = null; $("file").value = ""; $("title").value = ""; $("caption").value = ""; newPrompt(); $("prev").hidden = true;
     $("dropText").innerHTML = "<b>Choose a drawing</b><br>PDF, JPG or PNG";
     say("Uploaded ✿ thank you!");
     setTimeout(() => say(""), 3000);
@@ -169,6 +170,7 @@ function render() {
     const card = el("div", { class: "pic" + (x.byOwner ? " owner" : "") },
       el("img", { src: x.image, alt: x.title || "drawing", loading: "lazy", onclick: () => zoom(x.image) }),
       x.title ? el("div", { class: "t" }, x.title) : null,
+      x.caption ? el("div", { class: "cap" }, x.caption) : null,
       el("div", { class: "by" }, `by ${x.byOwner ? OWNER_NAME : (x.name || "Anonymous")}`),
       canDelete(x) ? el("button", {
         class: "x", title: "Delete",
@@ -184,3 +186,23 @@ function render() {
 
 function zoom(src) { $("zoomImg").src = src; $("zoom").classList.add("on"); }
 $("zoom").addEventListener("click", () => $("zoom").classList.remove("on"));
+
+// ---------- poetic caption prompts ----------
+const PROMPTS = [
+  ["Where were you when you drew this?", "On the night train, knees up, a stranger asleep on my shoulder…"],
+  ["How did you feel while making it?", "Soft and a little homesick, like the last day of summer…"],
+  ["What was the light like?", "Late afternoon, honey-coloured, dust floating in it…"],
+  ["What were you listening to?", "Rain on the skylight and a song I'd forgotten I loved…"],
+  ["Who were you thinking of?", "My grandmother's hands, peeling oranges in winter…"],
+  ["What did the room smell like?", "Burnt toast, wet paint, and the lilacs from the market…"],
+  ["What would this drawing whisper if it could talk?", "Stay a little longer, the tea isn't cold yet…"],
+];
+let promptIdx = Math.floor(Math.random() * PROMPTS.length);
+function newPrompt() {
+  promptIdx = (promptIdx + 1) % PROMPTS.length;
+  const [q, ex] = PROMPTS[promptIdx];
+  $("capHint").textContent = q + " ✿";
+  $("caption").placeholder = ex;
+}
+$("capNew").addEventListener("click", newPrompt);
+newPrompt();
